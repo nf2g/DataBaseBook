@@ -1,0 +1,81 @@
+﻿<Window x:Class="MVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVM"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="20 8 20 8" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
+        <DataGrid AutoGenerateColumns="False" x:Name="AuthorGrid" ItemsSource="{Binding ViewBook}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path = BookId}" Header="id" Width="20" />
+                <!--DataGridTextColumn Binding="{Binding BookAuthors[0].AuthorId}" Header="id" Width="20" /-->
+                <DataGridTextColumn Binding="{Binding Path = Name}" Header="Книга" Width="120" />
+                <DataGridTextColumn Binding="{Binding Path = Authors[0].SurName}" Header="Фамилия" Width="60" />
+                <DataGridTextColumn Binding="{Binding Path = Authors[0].Name}" Header="Имя" Width="70" />
+                <DataGridTextColumn Binding="{Binding Path = Authors[0].MiddleName}" Header="Отчество" Width="70" />
+                <DataGridTextColumn Binding="{Binding Path = Genres[0].GenreName}" Header="Жанр" Width="70" />
+                <DataGridTextColumn Binding="{Binding Path = Genres[1].GenreName}" Width="70" />
+
+                <DataGridTextColumn Binding="{Binding Path = Description}" Header="Содержание" Width="125" />
+                <DataGridTextColumn Binding="{Binding Path = Year}" Header="Год" Width="40" />
+                <DataGridTextColumn Binding="{Binding Path = Genres[0].Description}" Header="Описание" Width="70" />
+                <DataGridTextColumn Binding="{Binding Path = Genres[1].Description}" Width="70" />
+                <DataGridTextColumn Binding="{Binding Path = PublisherName.PublisherName}" Header="Издатель" Width="50" />
+                <DataGridTextColumn Binding="{Binding Path = PublisherName.Adress}" Header="Адресс Издателя" Width="*" />
+                <DataGridTextColumn Binding="{Binding Path = PublisherName.Email}" Header="Email Издателя" Width="120" />
+                <DataGridTextColumn Binding="{Binding Path = PublisherName.Phone}" Header="Телефон Издателя" Width="120" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <DataGrid AutoGenerateColumns="False" x:Name="BooksGrid" ItemsSource="{Binding ViewScript}" Margin="0,249,-0.4,10" Grid.RowSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Издательство}" Header="Издательство" Width="100" />
+                <DataGridTextColumn Binding="{Binding Роман}" Header="Роман" Width="100" />
+                <DataGridTextColumn Binding="{Binding ИсторическийРоман}" Header="Исторический Роман" Width="*" />
+                <DataGridTextColumn Binding="{Binding ПриключенческийРоман}" Header="Приключенческий Роман" Width="*" />
+                <DataGridTextColumn Binding="{Binding ПоэмаВПрозе}" Header="Поэма в прозе" Width="100" />
+                <DataGridTextColumn Binding="{Binding Трагедия}" Header="Трагедия" Width="100" />
+                <!--DataGridTextColumn Header="Жанр">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding Converter="{StaticResource cItemsToTextConverter}">
+                            <Binding Path="GenreBooks[0].GenreName"/>
+                            <Binding Path="GenreBooks[1].GenreName"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn-->
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.RowSpan="2" Margin="188,321,182.6,46" Width="423">
+            <Button x:Name="Script1Button" Command="{Binding Script1Command}" Click="Button_Click">Запрос 1</Button>
+            <Button x:Name="Script2Button" Command="{Binding Script2Command}" Click="Button_Click">Запрос 2</Button>
+            <Button x:Name="Script3Button" Command="{Binding Script3Command}" Click="Button1_Click">Запрос 3</Button>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+            <Button x:Name="LoadButton" Content="Вывести данные" Click="LoadButton_Click" Margin="20,8,20,8.4" />
+            <Button x:Name="UpdateButton"  Command="{Binding UpdateCommand}" Click="SaveButton_Click">Сохранить</Button>
+            <Button x:Name="AddButton" Command="{Binding AddCommand}" Click="EditButton_Click">Добавить</Button>
+            <Button x:Name="RemoveButton"  Command="{Binding RemoveCommand}" Click="EditButton_Click">Удалить</Button>
+            <Button x:Name="ClearButton" Content="Очистить" Click="ClearButton_Click" />
+            <Button x:Name="CloseButton" Content="Закрыть" Click="CloseButton_Click" />
+        </StackPanel>
+
+    </Grid>
+</Window>
